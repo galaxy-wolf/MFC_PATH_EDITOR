@@ -1,0 +1,22 @@
+#version 440
+layout (location = 0) in vec4 Position;
+layout (location = 1) in vec4 color;
+layout (location = 2) in vec4 normal;
+
+
+layout (location = 0) out vec4 world_position;
+layout (location = 1) out vec4 world_normal;
+
+uniform mat4 MV;
+uniform mat4 P;
+
+
+void main()
+{
+
+	world_position = MV * Position;
+	gl_Position = P * world_position;
+// normal last item is 0;
+	world_normal = MV * vec4(normal.xyz, 0);
+
+}

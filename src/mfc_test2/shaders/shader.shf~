@@ -1,0 +1,13 @@
+#version 440
+in vec2 UV;
+out vec4 FragColor;
+in vec4 Color;
+
+uniform sampler2D myTextureSampler;
+
+void main()
+{
+	FragColor = vec4(texture2D(myTextureSampler, UV).rgb, Color.a);
+
+		
+}

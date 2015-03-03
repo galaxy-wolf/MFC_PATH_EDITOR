@@ -1,0 +1,58 @@
+# conf
+# path 
+#RGB
+PATH="./bathroom/q1.obj"
+RGB=(192.0/255,129.0/255,74.0/255)
+PATH="./bathroom/q2.obj"
+RGB=(1.0,1.0,1.0)
+
+
+PATH="./aoBathroom/littleBarrier.obj",      -1,0,{169.0/255,170.0/255,156.0/255},      1,  0,0},  //2
+PATH="./aoBathroom/littleWall.3ds",       11,0,{0.2,0.3,0.4},     0,  0,0}, //3
+PATH="./bathroom/toilet2.3ds",       -1,0,{0.9,0.9,0.9},      0,  CHINAREFLECT,0},//5
+PATH="./bathroom/toilet4.3ds",       -1,0,{0.9,0.9,0.9},      0,  CHINAREFLECT,0},//7
+PATH="./bathroom/toilet5.3ds",       -1,0,{0.9,0.9,0.9},      0,  0,0},//8
+PATH="./bathroom/toilet6.3ds",       -1,0,{0.9,0.9,0.9},      0,  CHINAREFLECT,0},//9
+PATH="./bathroom/washbasin42.3ds",     -1,0,{0.9,0.9,0.9},  0,CHINAREFLECT,0},//15
+PATH="./bathroom/wash_basin0_t.obj",       -1,0,{0.9,0.9,0.9},      1,  CHINAREFLECT,0},//10
+PATH="./bathroom/washbasin1.3DS",       -1,0,{0.9,0.9,0.9},      0,  CHINAREFLECT,0},//11
+PATH="./bathroom/washbasin2_n.3ds",       -1,0,{0.9,0.9,0.9},     0,  CHINAREFLECT,0},//12
+PATH="./bathroom/washbasin3_n.3ds",       -1,0,{0.91,0.9,0.9},      0,  CHINAREFLECT,0},//13
+PATH="./bathroom/washbasin41.3ds",     -1,0,{0.9,0.9,0.9},      0,CHINAREFLECT,0},//14
+PATH="./bathroom/washbasinCircle.3DS",       -1,0,{0.9,0.9,0.9},      0, 0 ,0},//16
+PATH="./bathroom/toiletGap1.3DS",      -1,0,{0.9,0.9,0.9},      0,  CHINAREFLECT,0},//17
+PATH="./bathroom/toiletGap2.3DS",      -1,0,{0.9,0.9,0.9},     0,  0,0},//18
+PATH="./bathroom/toiletUp1.3DS",      -1,0,{0.9,0.9,0.9},    0,  0,0},//19
+PATH="./bathroom/toiletUpbody1.3DS",      -1,0,{0.9,0.9,0.9},      0,  CHINAREFLECT,0},//20
+PATH="./bathroom/toiletUpUp3.3DS",      -1,1,{0.9,0.9,0.9},      0,  0,0},
+PATH="./bathroom/toiletUpPlane3.3DS",      -1,0,{0.91,0.9,0.9},     0,  CHINAREFLECT,0},
+PATH="./bathroom/ceil.3ds",            -1,0,{0.9,0.9,0.9},     0,  0,0},//0.15
+PATH="./aoBathroom/walls.3ds",            8,0,{0.85,0.8,0.85},     0,  0,0},//0.15
+PATH="./bathroom/senie.3ds",            12,0,{0.85,0.8,0.85},      0,  0,0},//0.15
+PATH="./bathroom/floor.3ds",            -1,0,{0.9,0.9,0.9},     0,  0.00,0},//0.15
+PATH="./aoBathroom/masic.3ds",            7,0,{1,0,0},      0,  0.1,0},//0.15
+"./bathroom/paperRoll.3ds",            -1,0,{1,225.0/255,250.0/255},      0,  0,0},//0.15
+"./bathroom/paperSupport.3ds",            -1,0,{0.7,0.9,0.6},     0,  0,0},//0.15
+"./bathroom/cockTop1.3ds",            -1,0,METAL,     0, METALREFLECT,0},//0.15
+"./bathroom/cockBody1.3ds",            -1,0,METAL,      0, METALREFLECT,0},//0.15
+"./bathroom/cockTop2.3ds",            -1,0,METAL,      0, METALREFLECT,0},//0.15
+"./bathroom/cockBody2.3ds",            -1,0,METAL,      0, METALREFLECT,0},//0.15
+
+"./bathroom/wheel1.3ds",            -1,0,METAL,      0, METALREFLECT,0},//0.15
+"./bathroom/wheel2.3ds",            -1,0,METAL,      0, METALREFLECT,0},//0.15
+"./bathroom/soapSurport2.obj",            -1,0,METAL,     1, METALREFLECT,0},//0.15
+"./bathroom/dish1.3ds",            -1,0,{247.0/255,242.0/255,216.0/255},      0, 0.0,0},//0.15
+"./bathroom/dish2.3ds",            -1,0,{247.0/255,242.0/255,216.0/255},      0, 0.2,0},//0.15
+"./bathroom/cup.obj",            -1,0,{0.9,0.9,0.9},    1, 0},//0.15
+"./bathroom/toothBrush.3ds",            -1,0,{108.0/255,65.0/255,42.0/255},     0, 0,0},//0.15
+"./bathroom/toothBrush2.3ds",            -1,0,{88.0/255,163.0/255,22.0/255},      0, 0,0},//0.15
+PATH="./bathroom/white2.obj",            -1,0,{1,1,1},      1, 0,0},//0.15
+PATH="./bathroom/toothOnDesk/toothBrush.obj",            -1,0,{192.0/255,129.0/255,74.0/255},     1, 0,0},//0.15
+PATH="./bathroom/toothOnDesk/Brush3.obj",            -1,0,{1,1,1},      1, 0,0},//0.15
+
+PATH="./bathroom/newWash.obj",            -1,0,{0.9,0.9,0.9},     1, 0.0,0},//0.15
+
+PATH="./bathroom/mirrorFrame.3ds",            -1,0,{1,219.0/255,207.0/255},     0, 0,0},//0.15
+PATH="./bathroom/mirror.3ds",            -1,0,{1,219.0/255,207.0/255},     0, 1,0},//0.15
+PATH="./bathroom/sopportM.obj",            -1,0,{198.0/255,219.0/255,207.0/255},   1, 0.2,0},//0.15
+PATH="./bathroom/supportNoM.obj",            -1,0,{198.0/255,219.0/255,207.0/255},   1, 0.0,0},//0.15

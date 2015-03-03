@@ -1,0 +1,77 @@
+Shading Language Version: 4.40 NVIDIA via Cg compiler
+
+GL_ARB_fragment_shader found
+Max Fragment Uniform Components: 2048
+Max Texture Coords: 8
+Max Texture Image Units: 32
+
+GL_ARB_vertex_shader found
+Max Vertex Uniform Components: 4096
+Max Varying Floats: 124
+Max Vertex Attribs: 16
+Max Texture Image Units: 32
+Max Vertex Texture Image Units: 32
+Max Combined Texture Image Units: 192
+Max Texture Coords: 8
+
+GL_ARB_geometry_shader4 found
+Max Geometry Texture Image Units: 32
+Max Geometry Varying Components: 124
+Max Vertex Varying Components: 124
+Max Varying Components: 124
+Max Geometry Uniform Components: 2048
+Max Geometry Output Vertices: 1024
+Max Geometry Total Output Components: 1024
+
+GL_EXT_gpu_shader4 found
+Min Program Texel Offset: -8
+Max Program Texel Offset: 7
+
+GL_ARB_draw_buffers found
+Max Draw Buffers: 8
+
+GL_ARB_uniform_buffer_object found
+
+GL_ARB_tessellation_shader found
+Max Patch Vertices: 32
+Max Tess Gen Level: 64
+Max Tess Control Texture Image Units: 32
+Max Tess Evaluation Texture Image Units: 32
+Max Tess Control Output Components: 128
+Max Tess Patch Components: 120
+Max Tess Control Total Output Components: 4216
+Max Tess Evaluation Output Components: 128
+Max Tess Control Input Components: 128
+Max Tess Evaluation Input Components: 128
+
+GL_ARB_compute_shader found
+Max Compute Uniform Blocks: 14
+Max Compute Uniform Components: 2048
+Max Combined Compute Uniform Components: 231424
+Max Compute Texture Image Units: 32
+Max Compute Image Uniforms: 8
+Max Compute Shared Memory Size: 49152
+Max Compute Atomic Counter Buffers: 8
+Max Compute Atomic Counters: 16384
+Max Compute Work Group Invocations: 1536
+Max Compute Work Group Count: 65535 65535 65535
+Max Compute Work Group Size: 1536 1024 64
+
+
+
+Creating Program:	shader.shv	.shc	.she	.shg	shader.shf	.shx
+	local source addition:
+
+
+	Vertex:
+	Shader shaders/shader.shv compile: success
+	Info Log:
+
+	Fragment:
+	Shader shaders/shader.shf compile: success
+	Info Log:
+
+	Program link: success
+	Info Log:
+
+

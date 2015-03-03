@@ -1,0 +1,9 @@
+#ifndef MATH_CONSTANTS_H
+#define MATH_CONSTANTS_H
+
+#define PI					3.1415926535f
+#define TWOPI				6.283185307f
+#define PIOVER180			0.0174532925f
+#define RAD2DEG				57.2957795131f
+
+#endif

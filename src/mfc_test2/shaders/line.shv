@@ -1,0 +1,9 @@
+#version 440
+layout (location = 0) in vec3 Position;
+out float depth;
+uniform mat4 P;
+void main()
+{
+    gl_Position = P * vec4(Position.xyz, 1.0);
+    depth = Position.z;
+}

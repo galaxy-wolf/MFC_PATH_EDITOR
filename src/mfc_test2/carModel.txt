@@ -1,0 +1,4 @@
+#define Red
+1.0, 0.0, 0.0
+./data/models/Car.3DS
+Red

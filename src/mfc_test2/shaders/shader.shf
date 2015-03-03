@@ -1,0 +1,19 @@
+#version 440
+in vec2 UV;
+out vec4 FragColor;
+
+uniform sampler2D myTextureSampler;
+uniform bool useTexture;
+uniform vec4 baseColor;
+
+void main()
+{
+    if (useTexture)
+    {
+        FragColor = vec4(texture2D(myTextureSampler, UV).rgb, 1.0);
+    }
+    else{
+        FragColor = baseColor;
+    }
+
+}

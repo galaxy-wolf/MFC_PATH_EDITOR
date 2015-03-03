@@ -1,0 +1,30 @@
+#version 440
+in vec2 UV;
+out vec4 FragColor;
+in vec3 normal;
+
+uniform sampler2D myTextureSampler;
+uniform bool useTexture;
+uniform vec4 baseColor;
+
+struct DirectionalLight
+{
+    vec3 Color;
+    float AmbientIntensity;
+    float DiffuseIntensity;
+    vec3 Direction;
+};
+
+uniform struct DirectionalLight gDirectionalLight;
+void main()
+{
+   if (useTexture)
+    {
+        FragColor = vec4(texture2D(myTextureSampler, UV).rgb, 1.0);
+    }
+    else{
+        FragColor = baseColor;
+    }
+
+
+}

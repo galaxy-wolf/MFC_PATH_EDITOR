@@ -1,0 +1,29 @@
+#version 440
+layout (location = 0) in vec3 Position; 
+out vec4 Color;
+uniform mat4 gWorld;
+uniform mat4 MV;
+
+void main()
+{
+	vec3 p ;
+    gl_Position = gWorld * vec4(Position, 1.0);
+
+p = Position;
+if (p.x < 0)
+	p.x = -1*p.x;
+if (p.y < 0)
+	p.y = -1*p.y;
+if (p.z < 0)
+	p.z = -1*p.z;
+p.x = p.x /1.2;
+p.y = p.y / 1.2;
+p.z = p.z /1.2;
+
+	vec4 temp = MV * vec4(Position, 1.0);
+		//    R	   G	B	Depth
+	Color = vec4(p.x, p.y, p.z, temp.z/temp.w); 
+	
+
+
+}

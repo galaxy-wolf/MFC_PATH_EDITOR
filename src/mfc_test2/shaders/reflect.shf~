@@ -1,0 +1,213 @@
+#version 440
+layout (location = 0) out vec4 FragColor;
+
+layout (location = 0) in vec4 world_position;
+layout (location = 1) in vec4 world_normal;
+
+// for test
+//layout (location = 0) out vec4 position;
+//layout (location = 1) out vec4 normal;
+//layout (location = 2) out vec4 reflect;
+
+uniform sampler2D myTextureSampler;
+uniform mat4 P;
+uniform vec4 EyeW;
+uniform vec2 window;
+
+
+vec3 startPointOfTex(vec2 projStart, vec2 projEnd, float rayStartz, float rayEndz)
+{
+	vec2 Ste = projEnd - projStart;
+	float alpha = 0;
+	// first time 确定起始坐标
+	if (projStart.x < 0){
+		alpha = (0.0 - projStart.x) / (projEnd.x - projStart.x);
+		projStart.y = projStart.y + alpha * Ste.y;
+		projStart.x = 0.0;
+	}	
+	 else if (projStart.x > 1.0){
+		 alpha = (1.0 - projStart.x) / Ste.x;
+		 projStart.y = projStart.y + alpha*Ste.y;
+		 projStart.x = 1.0f;
+	 }
+	 else if (projStart.y > 1){
+		 alpha = (1.0 - projStart.y) / Ste.y;
+		 projStart.x = projStart.x + alpha*Ste.x;
+		 projStart.y = 1.0f;
+	 }
+	 else if (projStart.y < 0.000){
+		 alpha = (0.0000 - projStart.y) / Ste.y;
+		 projStart.x = projStart.x + alpha*Ste.x;
+		 projStart.y = 0.0000f;
+	 }
+	 rayStartz = 1 / ((1 - alpha)*(1 / rayStartz) + (alpha)*(1 / rayEndz)); //深度是这么求的
+
+	// secode time 确定起始坐标
+	 alpha = 0.0f;
+	 if (projStart.x < 0){
+		 alpha = (0.00000 - projStart.x) / (projEnd.x - projStart.x);
+		 projStart.y = projStart.y + alpha*Ste.y;
+		 projStart.x = 0.00000;
+	 }
+	 else if (projStart.x > 1.0){
+		 alpha = (1.0 - projStart.x) / Ste.x;
+		 projStart.y = projStart.y + alpha*Ste.y;
+		 projStart.x = 1.0f;
+	 }
+	 else if (projStart.y > 1){
+		 alpha = (1.0 - projStart.y) / Ste.y;
+		 projStart.x = projStart.x + alpha*Ste.x;
+		 projStart.y = 1.0f;
+	 }
+	 else if (projStart.y < 0.000){
+		 alpha = (0.0000 - projStart.y) / Ste.y;
+		 projStart.x = projStart.x + alpha*Ste.x;
+		 projStart.y = 0.0000f;
+	 }
+	 rayStartz = 1 / ((1 - alpha)*(1 / rayStartz) + (alpha)*(1 / rayEndz));
+
+	 return vec3(projStart.x,projStart.y ,rayStartz);
+
+
+
+}
+void main()
+{
+	//defult color is : pink;
+	FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+	vec3 a, N, R; // R is reflect vector
+	float length;
+// **** 1, get Reflect vector*****//
+	a = EyeW.xyz - world_position.xyz;
+	N = normalize(world_normal.xyz);
+	length = 2*dot(a, N);
+	if (length < 0)	// incidence angle > 90
+	{
+		return ;
+	}
+	R = normalize(length*N - a);
+
+// ??? R to 2D-map
+	
+	float epison = 0.06;
+	vec3 rayStart = world_position.xyz + epison * R;
+	float max_rfl = 370;   //?????????????? why 370
+	vec3 rayEnd = world_position.xyz + max_rfl *R;
+	
+	if (rayEnd.z > 0)
+	{
+		float step = -1 * world_position.z /  R.z;
+		rayEnd = world_position.xyz + (step -1)*R;
+	}
+	vec3 projStart;
+	vec3 projEnd;
+	float depthDelta;
+	vec4 temp;
+	temp = (P * vec4(rayStart, 1));
+	projStart = temp.xyz / temp.w;
+	temp = (P * vec4(rayEnd, 1));
+	projEnd = temp.xyz / temp.w;
+	projStart.x = projStart.x / 2 + 0.5;
+	projStart.y = projStart.y / 2 + 0.5;
+	projEnd.x = projEnd.x / 2 + 0.5;
+	projEnd.y = projEnd.y / 2 + 0.5;
+	
+	 //使起始和结束像素点在合适的范围内
+	 vec3 shiftEndValue = startPointOfTex(vec2(projEnd.x, projEnd.y), vec2(projStart.x, projStart.y), rayEnd.z, rayStart.z);
+	 projEnd.x = shiftEndValue.x;
+	 projEnd.y = shiftEndValue.y;
+	 rayEnd.z = shiftEndValue.z;
+
+	 vec3 shiftStarValue = startPointOfTex(vec2(projStart.x, projStart.y), vec2(projEnd.x, projEnd.y), rayStart.z, rayEnd.z);
+	 projStart.x = shiftStarValue.x;
+	 projStart.y = shiftStarValue.y;
+	 rayStart.z = shiftStarValue.z;
+
+	 if (projStart.x>1 || projStart.x<0 || projStart.y<0 || projStart.y>1 || rayStart.z>0)
+	 {
+		 return ;
+	 }
+
+	 float alpha = 0.0;
+	 //确定搜索步长和步数
+	 vec2 interval = vec2(projEnd.x - projStart.x,projEnd.y-projStart.y);
+	 int stepN, stepNMip;
+	 float d_mapScale;
+	 if (abs(interval.x) > abs(interval.y)){
+		 d_mapScale = 1 / window.x;//512.0;   // ???why 512;
+		 stepN = int(abs(interval.x) / d_mapScale);
+	 }
+	 else{
+		 d_mapScale = 1 / window.y;// 424.0; // ??? why 424
+		 stepN = int(abs(interval.y) / d_mapScale);
+	 }
+
+
+	 float currSamplePointZ, currRayPointZ, n, prevSamplePointZ, prevRayPointZ;
+	 float currSamplePoint, currRayPoint;
+	 n = 0;
+
+
+	 vec2 tc = vec2(projStart.x, projStart.y);
+	 if (tc.x > 1 || tc.x < 0 || tc.y>1 || tc.y < 0)
+		 return ;
+
+// ??????intersection // get UV
+	 //开始比较了
+	 int count = 0;
+	 bool formerCompare = false;
+	 bool compare = false;
+	 vec2 formertc;
+
+	 currSamplePointZ = texture2D(myTextureSampler, tc).w;
+
+	 alpha = 0.0f;
+	 currRayPointZ = 1 / ((1 - alpha)*(1 / rayStart.z) + (alpha)*(1 / rayEnd.z));
+	 compare = (currRayPointZ <= currSamplePointZ);
+
+	 bool isNotValid = compare;
+
+
+	 n = 1.0;
+	 for (; tc.x >= 0 && tc.x <= 1 && tc.y >= 0 && tc.y <= 1 && n < stepN;n+=1){
+		 formertc = tc;
+		 formerCompare = compare;
+		 tc = vec2(projStart.x, projStart.y) + interval*n / stepN;
+		 alpha = n / stepN;
+		 currRayPointZ = 1 / ((1 - alpha)*(1 / rayStart.z) + (alpha)*(1 / rayEnd.z));
+		 currSamplePointZ = texture2D(myTextureSampler, tc).w;
+
+		 if (currSamplePointZ > 0){
+			 isNotValid = true;
+			 continue;
+		 }
+
+		 compare = (currRayPointZ <= currSamplePointZ);
+
+		 if ((currSamplePointZ < 0) && compare){
+			if(!isNotValid){
+				 vec4 color;
+				 color = texture2D(myTextureSampler, tc);
+
+				 float lastAlpha = (n - 1) / stepN;
+				 float prevRayPointZ = 1 / ((1 - lastAlpha)*(1 / rayStart.z) + (lastAlpha)*(1 / rayEnd.z));
+				 float last2Alpha = (n + 1) / stepN;
+				 float prev2RayPointZ = 1 / ((1 - lastAlpha)*(1 / rayStart.z) + (lastAlpha)*(1 / rayEnd.z));
+				 if (color.y == 0.0 || color.w > 0){
+					 isNotValid = true;
+					 continue;
+				 }
+				 FragColor = color;
+				 return ;
+				 continue;
+			 }
+			 else if (isNotValid){
+				 isNotValid = false;
+
+			}
+		}
+	 }
+
+
+
+}
